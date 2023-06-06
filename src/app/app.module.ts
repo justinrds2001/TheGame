@@ -7,6 +7,9 @@ import { SudokuComponent } from './minigames/sudoku/sudoku.component';
 import { DrawaiComponent } from './minigames/drawai/drawai.component';
 import { PictureaiComponent } from './minigames/pictureai/pictureai.component';
 import { TextaiComponent } from './minigames/textai/textai.component';
+import { FormsModule } from '@angular/forms';
+import { CdTimerModule } from 'angular-cd-timer';
+
 
 @NgModule({
   declarations: [
@@ -18,7 +21,9 @@ import { TextaiComponent } from './minigames/textai/textai.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    CdTimerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

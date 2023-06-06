@@ -1,1 +1,12 @@
-<p>sudoku works!</p>
+<div class="timer-container">
+  <cd-timer class="timer" format="ms"></cd-timer>
+</div>
+<table id="grid" border="1" style="border-collapse: collapse;">
+    <tr *ngFor="let row of board; let j = index" class="row">
+        <td *ngFor="let cell of row; let i = index" class="cell">
+            <input [disabled]="board[i][j] !== 0" type="text" maxlength="1" (input)="onCellChange($event, i, j)" [(ngModel)]="!board[i][j] ? '' : board[i][j]" />
+        </td>
+    </tr>
+</table>
+
+<button (click)="submit()">Solve</button>
