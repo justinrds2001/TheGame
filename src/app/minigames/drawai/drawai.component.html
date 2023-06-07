@@ -1,1 +1,8 @@
-<p>drawai works!</p>
+<canvas #myCanvas width="800" height="600"
+        (mousedown)="onMouseDown($event)"
+        (mousemove)="onMouseMove($event)"
+        (mouseup)="onMouseUp()"
+        (touchstart)="onTouchStart($event)"
+        (touchmove)="onTouchMove($event)"
+        (touchend)="onTouchEnd()">
+</canvas>
