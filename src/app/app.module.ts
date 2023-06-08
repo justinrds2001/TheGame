@@ -7,6 +7,8 @@ import { SudokuComponent } from './minigames/sudoku/sudoku.component';
 import { DrawaiComponent } from './minigames/drawai/drawai.component';
 import { PictureaiComponent } from './minigames/pictureai/pictureai.component';
 import { TextaiComponent } from './minigames/textai/textai.component';
+import { ColorPickerModule } from 'ngx-color-picker';
+
 
 @NgModule({
   declarations: [
@@ -18,7 +20,8 @@ import { TextaiComponent } from './minigames/textai/textai.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ColorPickerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
