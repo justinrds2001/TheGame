@@ -1,0 +1,103 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+
+.collection {
+  border: 1px solid #000000;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: max-content;
+  background-color: white;
+}
+
+.collection-items {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.dragHandle {
+  background-color: lightgray;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+}
+
+.dragHandle:hover {
+  cursor: move;
+}
+
+.bi {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  fill: currentColor;
+  font-size: 35px;
+}
+
+.switchButton {
+  margin-right: 10px;
+  margin-bottom: 10px;
+  width: 60px;
+  height: 60px;
+}
+
+.btn {
+  margin-right: 10px;
+  margin-bottom: 10px;
+  width: 60px;
+}
+
+.canvas-hover-cursor {
+  cursor: pointer;
+}
+
+.canvas-extract-cursor {
+  cursor: crosshair;
+}
+
+.canvas-auto-cursor {
+  cursor: auto;
+}
+
+/* centralize h1 */
+h1,
+h2 {
+  text-align: center;
+}
+
+/*---------------------------------------------------------*/
+.container {
+  margin-top: 20px;
+  display: flex;
+  align-items: flex-start;
+}
+
+canvas {
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  margin-right: 100px;
+}
+
+#disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+#themeImage {
+  width: 500px;
+  height: 500px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  margin-left: 100px;
+}
+
+#enabled {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
