@@ -1,14 +1,14 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { SudokuComponent } from './minigames/sudoku/sudoku.component';
-import { DrawaiComponent } from './minigames/drawai/drawai.component';
-import { PictureaiComponent } from './minigames/pictureai/pictureai.component';
-import { TextaiComponent } from './minigames/textai/textai.component';
-import { ColorPickerModule } from 'ngx-color-picker';
-
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { SudokuComponent } from "./minigames/sudoku/sudoku.component";
+import { DrawaiComponent } from "./minigames/drawai/drawai.component";
+import { PictureaiComponent } from "./minigames/pictureai/pictureai.component";
+import { TextaiComponent } from "./minigames/textai/textai.component";
+import { ColorPickerModule } from "ngx-color-picker";
+import { CdkDrag, CdkDragHandle } from "@angular/cdk/drag-drop";
 
 @NgModule({
   declarations: [
@@ -16,14 +16,16 @@ import { ColorPickerModule } from 'ngx-color-picker';
     SudokuComponent,
     DrawaiComponent,
     PictureaiComponent,
-    TextaiComponent
+    TextaiComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ColorPickerModule,
+    CdkDrag,
+    CdkDragHandle,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

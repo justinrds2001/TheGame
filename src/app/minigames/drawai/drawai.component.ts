@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import { Painting } from "./AIPaintingHandler/painting";
+import { PaintingCreator } from "./AIPaintingHandler/paintingCreator";
 
 @Component({
   selector: "drawai",
@@ -10,6 +12,9 @@ export class DrawaiComponent implements OnInit {
   canvasRef!: ElementRef<HTMLCanvasElement>;
   private context!: CanvasRenderingContext2D;
   private isDrawing = false;
+  theme: Painting = new Painting({ name: "", image: "" });
+
+  showPicture = false;
 
   color = "#000000";
   eraser = "#ffffff";
@@ -27,6 +32,7 @@ export class DrawaiComponent implements OnInit {
   private executedCommands: (() => void)[] = [];
 
   ngOnInit(): void {
+    this.theme = new PaintingCreator().pickRandomPainting();
     const canvas: HTMLCanvasElement = this.canvasRef.nativeElement;
     this.context = canvas.getContext("2d")!;
     this.context.lineWidth = this.penWidth;
@@ -110,7 +116,7 @@ export class DrawaiComponent implements OnInit {
         this.context.moveTo(controlX, controlY);
       };
 
-      command(); // Execute the command
+      command();
 
       // Add the command to the executedCommands array
       this.executedCommands.push(command);
@@ -172,25 +178,8 @@ export class DrawaiComponent implements OnInit {
   }
 
   //download canvas as png
-  downloadCanvas(): void {
-    const canvas: HTMLCanvasElement = this.canvasRef.nativeElement;
-
-    // Create a temporary canvas with a white background
-    const tempCanvas = document.createElement("canvas");
-    const tempContext = tempCanvas.getContext("2d")!;
-    tempCanvas.width = canvas.width;
-    tempCanvas.height = canvas.height;
-    tempContext.fillStyle = "#ffffff"; // Set the background color to white
-    tempContext.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
-
-    // Draw the original canvas onto the temporary canvas
-    tempContext.drawImage(canvas, 0, 0);
-
-    // Generate the download link using the temporary canvas
-    const link = document.createElement("a");
-    link.download = "drawing.png";
-    link.href = tempCanvas.toDataURL();
-    link.click();
+  finish(): void {
+    this.showPicture = true;
   }
 
   updateLineWidth(value: Event): void {
