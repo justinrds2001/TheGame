@@ -83,11 +83,6 @@ canvas {
   margin-right: 100px;
 }
 
-#disabled {
-  cursor: not-allowed;
-  pointer-events: none;
-}
-
 #themeImage {
   width: 500px;
   height: 500px;
@@ -96,8 +91,12 @@ canvas {
   margin-left: 100px;
 }
 
-#enabled {
+#disabled {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+}
+
+#enabled {
+  pointer-events: none;
 }
