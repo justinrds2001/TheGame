@@ -1,10 +1,10 @@
 <div class="timer-container">
-	<cd-timer class="timer" format="ms"></cd-timer>
+	<cd-timer #timer class="timer" format="ms"></cd-timer>
 </div>
 
 <div class="row">
 	<div class="col-md-6">
-		<h2>You</h2>
+		<h2>You {{ playerTime }}</h2>
 		<table id="grid" border="1" style="border-collapse: collapse">
 			<tr *ngFor="let row of board; let j = index" class="srows">
 				<td *ngFor="let cell of row; let i = index" class="cell">
@@ -19,9 +19,30 @@
 			</tr>
 		</table>
 		<div class="feedback {{ color }}">{{ feedback }}</div>
+		<button
+			[disabled]="!isPlaying"
+			class="btn btn-primary m-1"
+			(click)="submit()"
+		>
+			Check
+		</button>
+		<button
+			[disabled]="!isPlaying"
+			class="btn btn-danger m-1"
+			(click)="forfeit()"
+		>
+			Forfeit
+		</button>
+		<button
+			class="btn btn-warning m-1"
+			(click)="solve()"
+			style="display: none"
+		>
+			Solve
+		</button>
 	</div>
 	<div class="col-md-6">
-		<h2>AI</h2>
+		<h2>AI {{ aiTime }}</h2>
 		<table id="grid" border="1" style="border-collapse: collapse">
 			<tr *ngFor="let row of aiBoard; let j = index" class="srows">
 				<td *ngFor="let cell of row; let i = index" class="cell">
@@ -37,6 +58,3 @@
 		</table>
 	</div>
 </div>
-
-<button class="btn btn-primary m-1" (click)="submit()">Check</button>
-<button class="btn btn-danger m-1" (click)="forfeit()">Forfeit</button>
