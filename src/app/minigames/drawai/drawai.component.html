@@ -27,6 +27,8 @@
   <div class="collection-items">
     <label>Colour</label> <br />
     <input
+      [cpPositionRelativeToArrow]="true"
+      cpAlphaChannel="disabled"
       [(colorPicker)]="color"
       [style.background]="color"
       (colorPickerChange)="updateColor()" />

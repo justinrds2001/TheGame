@@ -12,27 +12,27 @@ export class DrawaiComponent implements OnInit {
   canvasRef!: ElementRef<HTMLCanvasElement>;
   private context!: CanvasRenderingContext2D;
   private isDrawing = false;
+  private isExtracting = false;
+  private prevX = 0;
+  private prevY = 0;
+  private executedCommands: (() => void)[] = [];
+  minDistance = 5;
+
   theme: Painting = new Painting({ name: "", image: "" });
-
   showPicture = false;
-
   color = "#000000";
   eraser = "#ffffff";
   penWidth = 15;
   eraserWidth = 50;
-
   isPenSelected = true;
   isEraserSelected = false;
-  isExtracting = false;
-
-  prevX = 0;
-  prevY = 0;
-
-  private minDistance = 2;
-  private executedCommands: (() => void)[] = [];
 
   ngOnInit(): void {
     this.theme = new PaintingCreator().pickRandomPainting();
+    this.initializeCanvas();
+  }
+
+  initializeCanvas(): void {
     const canvas: HTMLCanvasElement = this.canvasRef.nativeElement;
     this.context = canvas.getContext("2d")!;
     this.context.lineWidth = this.penWidth;
@@ -43,26 +43,26 @@ export class DrawaiComponent implements OnInit {
     this.context.fillRect(0, 0, canvas.width, canvas.height);
 
     canvas.addEventListener("mousedown", this.onMouseDown.bind(this));
-    canvas.addEventListener("mousemove", this.onMouseMove.bind(this));
-    canvas.addEventListener("mouseup", this.onMouseUp.bind(this));
     canvas.addEventListener("touchstart", this.onTouchStart.bind(this));
-    canvas.addEventListener("touchmove", this.onTouchMove.bind(this));
-    canvas.addEventListener("touchend", this.onTouchEnd.bind(this));
     canvas.addEventListener("mouseenter", this.onMouseEnter.bind(this));
   }
 
   selectPen(): void {
-    this.isPenSelected = true;
-    this.isEraserSelected = false;
-    this.context.strokeStyle = this.color;
-    this.context.lineWidth = this.penWidth;
+    if (!this.isPenSelected) {
+      this.isPenSelected = true;
+      this.isEraserSelected = false;
+      this.context.strokeStyle = this.color;
+      this.context.lineWidth = this.penWidth;
+    }
   }
 
   selectEraser(): void {
-    this.isPenSelected = false;
-    this.isEraserSelected = true;
-    this.context.strokeStyle = this.eraser;
-    this.context.lineWidth = this.eraserWidth;
+    if (!this.isEraserSelected) {
+      this.isPenSelected = false;
+      this.isEraserSelected = true;
+      this.context.strokeStyle = this.eraser;
+      this.context.lineWidth = this.eraserWidth;
+    }
   }
 
   private getMouseCoordinates(event: MouseEvent | TouchEvent): {
@@ -72,19 +72,10 @@ export class DrawaiComponent implements OnInit {
     const canvas: HTMLCanvasElement = this.canvasRef.nativeElement;
     const rect = canvas.getBoundingClientRect();
 
-    let clientX: number;
-    let clientY: number;
-
-    if (event instanceof MouseEvent) {
-      clientX = event.clientX;
-      clientY = event.clientY;
-    } else if (event instanceof TouchEvent) {
-      const touch = event.touches[0];
-      clientX = touch.clientX;
-      clientY = touch.clientY;
-    } else {
-      throw new Error("Invalid event type");
-    }
+    const clientX =
+      event instanceof MouseEvent ? event.clientX : event.touches[0].clientX;
+    const clientY =
+      event instanceof MouseEvent ? event.clientY : event.touches[0].clientY;
 
     const offsetX = clientX - rect.left;
     const offsetY = clientY - rect.top;
@@ -96,7 +87,6 @@ export class DrawaiComponent implements OnInit {
     const distance = Math.hypot(x - this.prevX, y - this.prevY);
 
     if (distance > this.minDistance && this.isDrawing) {
-      // Create and execute a new command
       const command = () => {
         const controlX = (x + this.prevX) / 2;
         const controlY = (y + this.prevY) / 2;
@@ -117,8 +107,6 @@ export class DrawaiComponent implements OnInit {
       };
 
       command();
-
-      // Add the command to the executedCommands array
       this.executedCommands.push(command);
     }
   }
@@ -174,10 +162,12 @@ export class DrawaiComponent implements OnInit {
   }
 
   updateColor(): void {
+    if (this.isEraserSelected) {
+      this.selectPen();
+    }
     this.context.strokeStyle = this.color;
   }
 
-  //download canvas as png
   finish(): void {
     this.showPicture = true;
   }
@@ -200,13 +190,11 @@ export class DrawaiComponent implements OnInit {
 
   private setCursorStyle(className: string): void {
     const canvas: HTMLCanvasElement = this.canvasRef.nativeElement;
-    if (canvas.classList.length > 0) {
-      canvas.classList.remove(
-        "canvas-extract-cursor",
-        "canvas-hover-cursor",
-        "canvas-auto-cursor"
-      );
-    }
+    canvas.classList.remove(
+      "canvas-extract-cursor",
+      "canvas-hover-cursor",
+      "canvas-auto-cursor"
+    );
     canvas.classList.add(className);
   }
 
@@ -218,19 +206,16 @@ export class DrawaiComponent implements OnInit {
 
   extractColor(): void {
     const canvas: HTMLCanvasElement = this.canvasRef.nativeElement;
-    const context = canvas.getContext("2d")!;
     this.isExtracting = true;
 
     const clickHandler = (event: MouseEvent) => {
       const { x, y } = this.getMouseCoordinates(event);
-      const pixelData = context.getImageData(x, y, 1, 1).data;
+      const pixelData = this.context.getImageData(x, y, 1, 1).data;
       const hexColor = this.rgbToHex(pixelData[0], pixelData[1], pixelData[2]);
       this.color = hexColor;
       this.updateColor();
       if (this.isEraserSelected) {
-        this.isEraserSelected = false;
-        this.isPenSelected = true;
-        this.context.lineWidth = this.penWidth;
+        this.selectPen();
       }
       canvas.removeEventListener("click", clickHandler);
       this.isExtracting = false;
