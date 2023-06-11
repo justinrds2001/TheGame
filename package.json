@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node --max-old-space-size=4096 ./node_modules/@angular/cli/bin/ng serve",
-    "build": "ng build --max-old-space-size=4096 ./node_modules/@angular/cli/bin/ng serve",
+    "start": "node --max-old-space-size=20000 ./node_modules/@angular/cli/bin/ng serve",
+    "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -16,7 +16,6 @@
     "@angular/compiler": "^16.0.0",
     "@angular/core": "^16.0.4",
     "@angular/forms": "^16.0.0",
-    "@angular/material": "^16.0.3",
     "@angular/platform-browser": "^16.0.0",
     "@angular/platform-browser-dynamic": "^16.0.0",
     "@angular/router": "^16.0.0",
