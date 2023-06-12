@@ -1,1 +1,40 @@
-<p>sudoku works!</p>
+<div class="timer-container">
+  <cd-timer class="timer" format="ms"></cd-timer>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <h2>You</h2>
+    <table class="grid" border="1" style="border-collapse: collapse">
+      <tr *ngFor="let row of board; let j = index" class="srows">
+        <td *ngFor="let cell of row; let i = index" class="cell">
+          <input
+            [disabled]="board[i][j] !== 0"
+            type="text"
+            maxlength="1"
+            (input)="onCellChange($event, i, j)"
+            [(ngModel)]="!board[i][j] ? '' : board[i][j]" />
+        </td>
+      </tr>
+    </table>
+    <div class="feedback {{ color }}">{{ feedback }}</div>
+  </div>
+  <div class="col-md-6">
+    <h2>AI</h2>
+    <table class="grid" border="1" style="border-collapse: collapse">
+      <tr *ngFor="let row of aiBoard; let j = index" class="srows">
+        <td *ngFor="let cell of row; let i = index" class="cell">
+          <input
+            [disabled]="true"
+            type="text"
+            maxlength="1"
+            (input)="onCellChange($event, i, j)"
+            [(ngModel)]="!aiBoard[i][j] ? '' : aiBoard[i][j]" />
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<button class="btn btn-primary m-1" (click)="submit()">Check</button>
+<button class="btn btn-danger m-1" (click)="forfeit()">Forfeit</button>
