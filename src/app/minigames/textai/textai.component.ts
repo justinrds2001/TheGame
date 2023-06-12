@@ -33,4 +33,8 @@ export class TextaiComponent implements OnInit{
 			this.feedback = "This text was actually written by " + writtenBy;
         } 
     }
+
+    next() {
+        this.textService.getRandomText().subscribe(text => this.text = text);
+    }
 }

@@ -24,18 +24,22 @@ export class TextService implements ITextService {
     }
 
     getRandomText(): Observable<Text> {
-        let randomNumber: number = Math.floor(Math.random() * this.texts.length);
-        let textChosen: boolean = false;
+        let allUsed: boolean = false;
         //Keep randomly selecting texts until all are used
-        while (!textChosen) {
+        while (!allUsed) {
+            let randomNumber: number = Math.floor(Math.random() * this.texts.length);
             if (!this.used.includes(randomNumber)) {
                 this.used.push(randomNumber);
                 return of(this.texts[randomNumber]);
             }
+            if (this.used.length == this.texts.length)
+            {
+                allUsed = true;
+            }
         }
-        //When all texts are used select the first one and randomize the rest
-        this.used = [0];
-        return of(this.texts[0]);
+        //When all texts are used tell the user and reset the used array so they can play again in the same tab.
+        this.used = [];
+        return of(new Text("All current texts viewed!", "You have currently viewed all available texts written by humans or A.I.! Try again with the same texts or wait until more are added.", "Information", "human"));
     }
-
+ 
 }

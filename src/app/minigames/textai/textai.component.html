@@ -7,5 +7,14 @@
     <p> {{ text.text }} </p>
 </div>
 <div class="feedback {{ color }}">{{ feedback }}</div>
-<button class="btn btn-primary m-1" (click)="submit($event)" id="Human">Human</button>
-<button class="btn btn-primary m-1" (click)="submit($event)" id="Ai">A.I.</button>
+
+<div class="row">
+    <div class="col-md-6">
+    <button class="btn btn-primary m-1" (click)="submit($event)" id="Human">Human</button>
+    <button class="btn btn-primary m-1" (click)="submit($event)" id="Ai">A.I.</button>
+    </div>
+    <div class="col-md-6">
+        <button class="btn btn-primary" (click)="next()">Next</button>
+    </div>
+</div>
+
