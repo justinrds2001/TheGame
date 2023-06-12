@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Text } from "./models/text.model";
 import { ITextService } from "./services/ITextService.service";
-import { TextService } from "./services/TextService.service";
 
 @Component({
 	templateUrl: "./textai.component.html",
