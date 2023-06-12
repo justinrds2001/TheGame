@@ -4,12 +4,18 @@ import { SudokuComponent } from './minigames/sudoku/sudoku.component';
 import { PictureaiComponent } from './minigames/pictureai/pictureai.component';
 import { TextaiComponent } from './minigames/textai/textai.component';
 import { DrawaiComponent } from './minigames/drawai/drawai.component';
+import { MenuComponent } from './menu/menu.component';
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'minigames/sudoku',
+    redirectTo: 'minigames',
+  },
+  {
+    path: 'minigames',
+    pathMatch: 'full',
+    component: MenuComponent,
   },
   {
     path: 'minigames/sudoku',
