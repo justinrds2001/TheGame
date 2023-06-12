@@ -19,6 +19,7 @@ export class TextaiComponent implements OnInit{
     ) {}
 
     ngOnInit(): void {
+        this.textService.resetTextCounter();
         this.textService.getRandomText().subscribe(text => this.text = text);
     }
 

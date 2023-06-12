@@ -41,5 +41,9 @@ export class TextService implements ITextService {
         this.used = [];
         return of(new Text("All current texts viewed!", "You have currently viewed all available texts written by humans or A.I.! Try again with the same texts or wait until more are added.", "Information", "Human"));
     }
+
+    resetTextCounter(): void {
+        this.used = [];
+    }
  
 }
