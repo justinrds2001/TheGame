@@ -2,7 +2,8 @@ import { ITextService } from "./ITextService.service";
 import { Observable, of } from "rxjs";
 import { Text } from "src/app/minigames/textai/models/text.model";
 
-export class textService implements ITextService {
+export class TextService implements ITextService {
+    private used: number[] = [];
     readonly texts: Text[] = [
         {
             title: 'Shark Finning: Threatening the Existence of Magnificent Marine Predators',
@@ -33,4 +34,28 @@ export class textService implements ITextService {
     getTexts(): Observable<Text[]> {
         return of(this.texts);
     }
+
+    getRandomText(): Observable<Text> {
+        let allUsed: boolean = false;
+        //Keep randomly selecting texts until all are used
+        while (!allUsed) {
+            let randomNumber: number = Math.floor(Math.random() * this.texts.length);
+            if (!this.used.includes(randomNumber)) {
+                this.used.push(randomNumber);
+                return of(this.texts[randomNumber]);
+            }
+            if (this.used.length == this.texts.length)
+            {
+                allUsed = true;
+            }
+        }
+        //When all texts are used tell the user and reset the used array so they can play again in the same tab.
+        this.used = [];
+        return of(new Text("All current texts viewed!", "You have currently viewed all available texts written by humans or A.I.! Try again with the same texts or wait until more are added.", "Information", "Human"));
+    }
+
+    resetTextCounter(): void {
+        this.used = [];
+    }
+ 
 }

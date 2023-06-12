@@ -8,4 +8,6 @@ import { Text } from "src/app/minigames/textai/models/text.model";
 
 export abstract class ITextService {
     abstract getTexts(): Observable<Text[]>;
+    abstract getRandomText(): Observable<Text>;
+    abstract  resetTextCounter(): void;
 }

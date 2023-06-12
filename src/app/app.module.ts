@@ -11,6 +11,9 @@ import { CdkDrag, CdkDragHandle } from "@angular/cdk/drag-drop";
 import { FormsModule } from "@angular/forms";
 import { ColorPickerModule } from "ngx-color-picker";
 import { CdTimerModule } from "angular-cd-timer";
+import { MenuComponent } from './menu/menu.component';
+import { ITextService } from "./minigames/textai/services/ITextService.service";
+import { TextService } from "./minigames/textai/services/TextService.service";
 
 @NgModule({
   declarations: [
@@ -19,6 +22,7 @@ import { CdTimerModule } from "angular-cd-timer";
     DrawaiComponent,
     PictureaiComponent,
     TextaiComponent,
+    MenuComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +33,9 @@ import { CdTimerModule } from "angular-cd-timer";
     CdkDrag,
     CdkDragHandle,
   ],
-  providers: [],
+  providers: [
+    { provide: ITextService, useClass: TextService },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
