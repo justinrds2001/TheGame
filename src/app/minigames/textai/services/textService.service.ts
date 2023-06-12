@@ -39,7 +39,7 @@ export class TextService implements ITextService {
         }
         //When all texts are used tell the user and reset the used array so they can play again in the same tab.
         this.used = [];
-        return of(new Text("All current texts viewed!", "You have currently viewed all available texts written by humans or A.I.! Try again with the same texts or wait until more are added.", "Information", "human"));
+        return of(new Text("All current texts viewed!", "You have currently viewed all available texts written by humans or A.I.! Try again with the same texts or wait until more are added.", "Information", "Human"));
     }
  
 }

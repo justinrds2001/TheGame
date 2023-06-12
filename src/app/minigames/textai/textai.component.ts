@@ -35,6 +35,7 @@ export class TextaiComponent implements OnInit{
     }
 
     next() {
+        this.feedback = "";
         this.textService.getRandomText().subscribe(text => this.text = text);
     }
 }
