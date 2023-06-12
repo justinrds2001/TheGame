@@ -2,10 +2,11 @@ import { ITextService } from "./ITextService.service";
 import { Observable, of } from "rxjs";
 import { Text } from "src/app/minigames/textai/models/text.model";
 
-export class textService implements ITextService {
+export class TextService implements ITextService {
+    private used: number[] = [];
     readonly texts: Text[] = [
         {
-            title: 'Majestic Giants: Discovering the Wonders of Elephants',
+            title: 'Tests',
             text: 'TestText',
             category: 'Test',
             createdBy: 'Human'
@@ -21,4 +22,20 @@ export class textService implements ITextService {
     getTexts(): Observable<Text[]> {
         return of(this.texts);
     }
+
+    getRandomText(): Observable<Text> {
+        let randomNumber: number = Math.floor(Math.random() * this.texts.length);
+        let textChosen: boolean = false;
+        //Keep randomly selecting texts until all are used
+        while (!textChosen) {
+            if (!this.used.includes(randomNumber)) {
+                this.used.push(randomNumber);
+                return of(this.texts[randomNumber]);
+            }
+        }
+        //When all texts are used select the first one and randomize the rest
+        this.used = [0];
+        return of(this.texts[0]);
+    }
+
 }

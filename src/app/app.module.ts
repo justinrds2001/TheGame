@@ -12,6 +12,8 @@ import { FormsModule } from "@angular/forms";
 import { ColorPickerModule } from "ngx-color-picker";
 import { CdTimerModule } from "angular-cd-timer";
 import { MenuComponent } from './menu/menu.component';
+import { ITextService } from "./minigames/textai/services/ITextService.service";
+import { TextService } from "./minigames/textai/services/TextService.service";
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { MenuComponent } from './menu/menu.component';
     CdkDrag,
     CdkDragHandle,
   ],
-  providers: [],
+  providers: [
+    { provide: ITextService, useClass: TextService },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
