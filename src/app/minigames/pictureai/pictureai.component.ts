@@ -1,8 +1,21 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { IPictureService } from "./services/IPictureService.service";
+import { Picture } from "./models/picture.model";
 
 @Component({
-	templateUrl: "./pictureai.component.html",
-	styleUrls: ["./pictureai.component.css"],
-	selector: "app-pictureai",
+  templateUrl: "./pictureai.component.html",
+  styleUrls: ["./pictureai.component.css"],
+  selector: "app-pictureai",
 })
-export class PictureaiComponent {}
+export class PictureaiComponent implements OnInit {
+  picture: Picture = new Picture({ name: "", image: "", description: "" });
+
+  constructor(private pictureService: IPictureService) {}
+
+  ngOnInit(): void {
+    this.pictureService.resetPictureCounter();
+    this.pictureService
+      .getRandomPicture()
+      .subscribe((picture) => (this.picture = picture));
+  }
+}

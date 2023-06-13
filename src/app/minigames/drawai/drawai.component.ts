@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { Painting } from "./AIPaintingHandler/painting";
 import { PaintingCreator } from "./AIPaintingHandler/paintingCreator";
+import { MatDialog } from "@angular/material/dialog";
 
 @Component({
   selector: "drawai",
@@ -232,4 +233,20 @@ export class DrawaiComponent implements OnInit {
     };
     return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
   }
+
+  //Open dialog on screen load
+  constructor(public dialog: MatDialog) {
+    this.openDialog();
+  }
+
+  //Open dialog
+  openDialog() {
+    this.dialog.open(Dialog);
+  }
 }
+
+@Component({
+  selector: "dialog-sudoku",
+  templateUrl: "./dialog-drawai.html",
+})
+export class Dialog {}

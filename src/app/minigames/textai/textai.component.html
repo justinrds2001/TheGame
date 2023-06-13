@@ -1,1 +1,47 @@
-<p>textai works!</p>
+<h1 class="title">Was this text written by a human or an A.I.?</h1>
+
+<div class="text">
+  <div class="row">
+    <div class="col-md-8">
+      <h2>{{ text.title }}</h2>
+    </div>
+    <div class="col-md-4">
+      <h3>Category: {{ text.category }}</h3>
+    </div>
+  </div>
+  <div>
+    <p>{{ text.text }}</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="feedback {{ color }}">{{ feedback }}</div>
+  <div class="col-md-10">
+    <button
+      [disabled]="disable"
+      class="btn btn-primary m-1"
+      (click)="submit($event)"
+      id="Human">
+      Human
+    </button>
+    <button
+      [disabled]="disable"
+      class="btn btn-primary m-1"
+      (click)="submit($event)"
+      id="Ai">
+      A.I.
+    </button>
+  </div>
+  <div class="col-md-2">
+    <button
+      class="btn btn-warning m-1"
+      title="Click for help"
+      (click)="openDialog()">
+      Rules
+    </button>
+
+    <button [disabled]="!disable" class="btn btn-primary m-1" (click)="next()">
+      Next
+    </button>
+  </div>
+</div>
