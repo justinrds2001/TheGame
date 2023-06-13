@@ -2,7 +2,7 @@ export default async function solve(
 	grid: number[][],
 	delay: boolean = false
 ): Promise<number[][] | null> {
-	if (delay) await new Promise((resolve) => setTimeout(resolve, 100));
+	if (delay) await new Promise((resolve) => setTimeout(resolve, 50));
 	const emptyCells: [number, number][] = [];
 	for (let i = 0; i < 9; i++) {
 		for (let j = 0; j < 9; j++) {
