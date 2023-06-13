@@ -4,9 +4,9 @@ import randomBoard from "./boards";
 import { MatDialog } from "@angular/material/dialog";
 
 @Component({
-  templateUrl: "./sudoku.component.html",
-  styleUrls: ["./sudoku.component.css"],
-  selector: "app-sudoku",
+	templateUrl: "./sudoku.component.html",
+	styleUrls: ["./sudoku.component.css"],
+	selector: "app-sudoku",
 })
 export class SudokuComponent implements OnInit {
 	@ViewChild("timer", { static: false }) timer: any;
@@ -27,10 +27,10 @@ export class SudokuComponent implements OnInit {
 		this.aiBoard = JSON.parse(JSON.stringify(this.board));
 	}
 
-  onCellChange(event: any, i: number, j: number) {
-    const value = event.target.value;
-    this.submitBoard[i][j] = value ? parseInt(value, 10) : 0;
-  }
+	onCellChange(event: any, i: number, j: number) {
+		const value = event.target.value;
+		this.submitBoard[i][j] = value ? parseInt(value, 10) : 0;
+	}
 
 	//print board to console
 	async submit() {
@@ -60,78 +60,78 @@ export class SudokuComponent implements OnInit {
 		}
 	}
 
-//Open dialog on screen load
-  constructor(public dialog: MatDialog) {
-    this.openDialog();
-  }
+	//Open dialog on screen load
+	constructor(public dialog: MatDialog) {
+		this.openDialog();
+	}
 
-  //Open dialog
-  openDialog() {
-    this.dialog.open(DialogContentExampleDialog);
-  }
+	//Open dialog
+	openDialog() {
+		this.dialog.open(DialogContentExampleDialog);
+	}
 
-  boardIsFilled(): boolean {
-    return !this.submitBoard.some((row) => row.includes(0));
-  }
+	boardIsFilled(): boolean {
+		return !this.submitBoard.some((row) => row.includes(0));
+	}
 
-  inputIsValid(grid: number[][]) {
-    if (this.submitBoard.some((row) => row.includes(0))) {
-      return false;
-    }
+	inputIsValid(grid: number[][]) {
+		if (this.submitBoard.some((row) => row.includes(0))) {
+			return false;
+		}
+		// check if grid is valid
+		for (let i = 0; i < 9; i++) {
+			// check rows
+			const row = grid[i];
+			if (this.hasDuplicates(row)) {
+				return false;
+			}
+			// check columns
+			const column = [];
+			for (let j = 0; j < 9; j++) {
+				column.push(grid[j][i]);
+			}
+			if (this.hasDuplicates(column)) {
+				return false;
+			}
+		}
+		// check 3x3 squares
+		for (let i = 0; i < 9; i += 3) {
+			for (let j = 0; j < 9; j += 3) {
+				const square = [];
+				for (let k = i; k < i + 3; k++) {
+					for (let l = j; l < j + 3; l++) {
+						square.push(grid[k][l]);
+					}
+				}
+				if (this.hasDuplicates(square)) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	hasDuplicates(array: number[]): boolean {
+		const set = new Set();
+		for (let i = 0; i < array.length; i++) {
+			if (array[i] != 0 && set.has(array[i])) {
+				return true;
+			}
+			set.add(array[i]);
+		}
+		return false;
+	}
 
 	async forfeit() {
 		this.submitBoard = (await solve(this.board)) as number[][];
 		this.color = "text-primary";
 		this.feedback = "Better luck next time! Here's the answer";
 	}
-    // check if grid is valid
-    for (let i = 0; i < 9; i++) {
-      // check rows
-      const row = grid[i];
-      if (this.hasDuplicates(row)) {
-        return false;
-      }
-      // check columns
-      const column = [];
-      for (let j = 0; j < 9; j++) {
-        column.push(grid[j][i]);
-      }
-      if (this.hasDuplicates(column)) {
-        return false;
-      }
-    }
-    // check 3x3 squares
-    for (let i = 0; i < 9; i += 3) {
-      for (let j = 0; j < 9; j += 3) {
-        const square = [];
-        for (let k = i; k < i + 3; k++) {
-          for (let l = j; l < j + 3; l++) {
-            square.push(grid[k][l]);
-          }
-        }
-        if (this.hasDuplicates(square)) {
-          return false;
-        }
-      }
-    }
-    return true;
-  }
-
-  hasDuplicates(array: number[]): boolean {
-    const set = new Set();
-    for (let i = 0; i < array.length; i++) {
-      if (array[i] != 0 && set.has(array[i])) {
-        return true;
-      }
-      set.add(array[i]);
-    }
-    return false;
-  }
 }
 
 //Dialog box
 @Component({
-  selector: "dialog-sudoku",
-  templateUrl: "./dialog-sudoku.html",
+	selector: "dialog-sudoku",
+	templateUrl: "./dialog-sudoku.html",
 })
 export class DialogContentExampleDialog {}
