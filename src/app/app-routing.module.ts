@@ -8,16 +8,6 @@ import { MenuComponent } from './menu/menu.component';
 
 const routes: Routes = [
   {
-    path: '',
-    pathMatch: 'full',
-    redirectTo: 'minigames',
-  },
-  {
-    path: 'minigames',
-    pathMatch: 'full',
-    component: MenuComponent,
-  },
-  {
     path: 'minigames/sudoku',
     pathMatch: 'full',
     component: SudokuComponent,
@@ -36,6 +26,16 @@ const routes: Routes = [
     path: 'minigames/drawai',
     pathMatch: 'full',
     component: DrawaiComponent,
+  },
+  {
+    path: 'minigames',
+    pathMatch: 'full',
+    component: MenuComponent,
+  },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'minigames',
   },
 ];
 
