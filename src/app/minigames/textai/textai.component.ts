@@ -12,6 +12,7 @@ export class TextaiComponent implements OnInit {
   text: Text = new Text("", "", "", "");
   feedback: string = "";
   color: string = "";
+  disable: boolean = false;
 
   constructor(public dialog: MatDialog, private textService: ITextService) {
     this.openDialog();
@@ -33,11 +34,16 @@ export class TextaiComponent implements OnInit {
       this.color = "text-danger";
       this.feedback = "This text was actually written by " + writtenBy;
     }
+    this.disable = true;
   }
 
   next() {
     this.feedback = "";
     this.textService.getRandomText().subscribe((text) => (this.text = text));
+    this.disable = false;
+    if (this.text.category == "Information") {
+      this.disable = true;
+    }
   }
 
   //Open dialog

@@ -16,15 +16,32 @@
 
 <div class="row">
   <div class="feedback {{ color }}">{{ feedback }}</div>
-  <div class="col-md-11">
-    <button class="btn btn-primary m-1" (click)="submit($event)" id="Human">
+  <div class="col-md-10">
+    <button
+      [disabled]="disable"
+      class="btn btn-primary m-1"
+      (click)="submit($event)"
+      id="Human">
       Human
     </button>
-    <button class="btn btn-primary m-1" (click)="submit($event)" id="Ai">
+    <button
+      [disabled]="disable"
+      class="btn btn-primary m-1"
+      (click)="submit($event)"
+      id="Ai">
       A.I.
     </button>
   </div>
-  <div class="col-md-1">
-    <button class="btn btn-primary" (click)="next()">Next</button>
+  <div class="col-md-2">
+    <button
+      class="btn btn-warning m-1"
+      title="Click for help"
+      (click)="openDialog()">
+      Rules
+    </button>
+
+    <button [disabled]="!disable" class="btn btn-primary m-1" (click)="next()">
+      Next
+    </button>
   </div>
 </div>

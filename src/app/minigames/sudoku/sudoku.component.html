@@ -19,6 +19,12 @@
     </table>
     <div class="feedback {{ color }}">{{ feedback }}</div>
     <button
+      class="btn btn-warning m-1"
+      title="Click for help"
+      (click)="openDialog()">
+      Rules
+    </button>
+    <button
       [disabled]="!isPlaying"
       class="btn btn-primary m-1"
       (click)="submit()">
@@ -30,9 +36,9 @@
       (click)="forfeit()">
       Forfeit
     </button>
-    <button class="btn btn-warning m-1" (click)="solve()" style="display: none">
+    <!--<button class="btn btn-warning m-1" (click)="solve()" style="display: none">
       Solve
-    </button>
+    </button>-->
   </div>
   <div class="col-md-6">
     <h2>AI {{ aiTime }}</h2>
@@ -50,12 +56,3 @@
     </table>
   </div>
 </div>
-
-<button
-  class="btn btn-warning m-1"
-  title="Click for help"
-  (click)="openDialog()">
-  Rules
-</button>
-<button class="btn btn-primary m-1" (click)="submit()">Check</button>
-<button class="btn btn-danger m-1" (click)="forfeit()">Forfeit</button>
