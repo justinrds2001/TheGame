@@ -11,6 +11,7 @@ import { CdkDrag, CdkDragHandle } from "@angular/cdk/drag-drop";
 import { FormsModule } from "@angular/forms";
 import { ColorPickerModule } from "ngx-color-picker";
 import { CdTimerModule } from "angular-cd-timer";
+import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { CdTimerModule } from "angular-cd-timer";
     ColorPickerModule,
     CdkDrag,
     CdkDragHandle,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
