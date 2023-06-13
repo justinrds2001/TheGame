@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import solve from "./sudokuAi";
+import randomBoard from "./boards";
 import { MatDialog } from "@angular/material/dialog";
 
 @Component({
@@ -8,50 +9,58 @@ import { MatDialog } from "@angular/material/dialog";
   selector: "app-sudoku",
 })
 export class SudokuComponent implements OnInit {
-  @ViewChild("timer", { static: false }) timer: any;
-  isPlaying: boolean = true;
-  feedback: string = "";
-  color: string = "";
-  playerTime: string = "";
-  aiTime: string = "";
+	@ViewChild("timer", { static: false }) timer: any;
+	feedback: string = "";
+	color: string = "";
+	playerTime: string = "";
+	aiTime: string = "";
+	isChecked: boolean = false;
 
-  board: number[][] = [
-    [5, 3, 0, 0, 7, 0, 0, 0, 0],
-    [6, 0, 0, 1, 9, 5, 0, 0, 0],
-    [0, 9, 8, 0, 0, 0, 0, 6, 0],
-    [8, 0, 0, 0, 6, 0, 0, 0, 3],
-    [4, 0, 0, 8, 0, 3, 0, 0, 1],
-    [7, 0, 0, 0, 2, 0, 0, 0, 6],
-    [0, 6, 0, 0, 0, 0, 2, 8, 0],
-    [0, 0, 0, 4, 1, 9, 0, 0, 5],
-    [0, 0, 0, 0, 8, 0, 0, 7, 9],
-  ];
+	board: number[][] = [];
+	submitBoard: number[][] = [];
+	aiBoard: number[][] = [];
 
-  submitBoard: number[][] = JSON.parse(JSON.stringify(this.board));
-  aiBoard: number[][] = JSON.parse(JSON.stringify(this.board));
-
-  answer: number[][] = [
-    [5, 6, 1, 8, 4, 7, 9, 2, 3],
-    [3, 7, 9, 5, 2, 1, 6, 8, 4],
-    [4, 2, 8, 9, 6, 3, 1, 7, 5],
-    [6, 1, 3, 7, 8, 9, 5, 4, 2],
-    [7, 9, 4, 6, 5, 2, 3, 1, 8],
-    [8, 5, 2, 1, 3, 4, 7, 9, 6],
-    [9, 3, 5, 4, 7, 8, 2, 6, 1],
-    [1, 4, 6, 2, 9, 5, 8, 3, 7],
-    [2, 8, 7, 3, 1, 6, 4, 5, 9],
-  ];
-
-  ngOnInit(): void {
-    console.log("sudoku init");
-  }
+	ngOnInit(): void {
+		console.log("sudoku init");
+		this.board = randomBoard();
+		this.submitBoard = JSON.parse(JSON.stringify(this.board));
+		this.aiBoard = JSON.parse(JSON.stringify(this.board));
+	}
 
   onCellChange(event: any, i: number, j: number) {
     const value = event.target.value;
     this.submitBoard[i][j] = value ? parseInt(value, 10) : 0;
   }
 
-  //Open dialog on screen load
+	//print board to console
+	async submit() {
+		if (this.inputIsValid(this.submitBoard)) {
+			this.timer.stop();
+			this.playerTime = `${this.timer.minutes}:${
+				this.timer.seconds < 10
+					? "0" + this.timer.seconds
+					: this.timer.seconds
+			}`;
+			// User has won, let AI solve
+			this.color = "text-success";
+			this.feedback = "That's correct! Let's see how the AI does it.";
+			console.log(this.submitBoard);
+			this.timer.start();
+			const answer = await solve(this.aiBoard, true);
+			this.aiTime = `${this.timer.minutes}:${
+				this.timer.seconds < 10
+					? "0" + this.timer.seconds
+					: this.timer.seconds
+			}`;
+			this.timer.stop();
+			console.log(answer);
+		} else {
+			this.color = "text-danger";
+			this.feedback = "That's not quite right. Try again!";
+		}
+	}
+
+//Open dialog on screen load
   constructor(public dialog: MatDialog) {
     this.openDialog();
   }
@@ -59,31 +68,6 @@ export class SudokuComponent implements OnInit {
   //Open dialog
   openDialog() {
     this.dialog.open(DialogContentExampleDialog);
-  }
-
-  //print board to console
-  async submit() {
-    if (this.inputIsValid(this.submitBoard)) {
-      this.timer.stop();
-      this.playerTime = `${this.timer.minutes}:${
-        this.timer.seconds < 10 ? "0" + this.timer.seconds : this.timer.seconds
-      }`;
-      this.isPlaying = false;
-      // User has won, let AI solve
-      this.color = "text-success";
-      this.feedback = "That's correct! Let's see how the AI does it.";
-      console.log(this.submitBoard);
-      this.timer.start();
-      const answer = await solve(this.aiBoard, true);
-      this.aiTime = `${this.timer.minutes}:${
-        this.timer.seconds < 10 ? "0" + this.timer.seconds : this.timer.seconds
-      }`;
-      this.timer.stop();
-      console.log(answer);
-    } else {
-      this.color = "text-danger";
-      this.feedback = "That's not quite right. Try again!";
-    }
   }
 
   boardIsFilled(): boolean {
@@ -95,6 +79,11 @@ export class SudokuComponent implements OnInit {
       return false;
     }
 
+	async forfeit() {
+		this.submitBoard = (await solve(this.board)) as number[][];
+		this.color = "text-primary";
+		this.feedback = "Better luck next time! Here's the answer";
+	}
     // check if grid is valid
     for (let i = 0; i < 9; i++) {
       // check rows
@@ -137,12 +126,6 @@ export class SudokuComponent implements OnInit {
       set.add(array[i]);
     }
     return false;
-  }
-
-  async forfeit() {
-    this.submitBoard = (await solve(this.board)) as number[][];
-    this.color = "text-primary";
-    this.feedback = "Better luck next time!";
   }
 }
 
