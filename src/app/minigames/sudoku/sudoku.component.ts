@@ -129,7 +129,7 @@ export class SudokuComponent implements OnInit {
 	}
 }
 
-//Dialog box
+//Dialog box :D
 @Component({
 	selector: "dialog-sudoku",
 	templateUrl: "./dialog-sudoku.html",
