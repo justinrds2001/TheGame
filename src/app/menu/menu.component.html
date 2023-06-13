@@ -1,0 +1,23 @@
+  <div class="p-5 text-center bg-light">
+    <h1 class="mb-3">AI  Minigames</h1>
+    <h4 class="mb-3">Learn about the power of AI by playing several minigames against it</h4>
+  </div>
+<div class="row">
+  <div class="col-sm-4" *ngFor="let item of menuItems" routerLink="{{item.route}}">
+    <div class="card">
+      <div class="image">
+        <div class="image-wrapper">
+          <img src="{{item.imgUrl}}" />
+        </div>
+      </div>
+      <div class="card-inner">
+        <div class="header">
+          <h2>{{item.title}}</h2>
+        </div>
+        <div class="content">
+          <p>{{item.description}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

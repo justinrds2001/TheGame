@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import solve from "./sudokuAi";
 import { MatDialog } from "@angular/material/dialog";
 
@@ -8,8 +8,12 @@ import { MatDialog } from "@angular/material/dialog";
   selector: "app-sudoku",
 })
 export class SudokuComponent implements OnInit {
+  @ViewChild("timer", { static: false }) timer: any;
+  isPlaying: boolean = true;
   feedback: string = "";
   color: string = "";
+  playerTime: string = "";
+  aiTime: string = "";
 
   board: number[][] = [
     [5, 3, 0, 0, 7, 0, 0, 0, 0],
@@ -60,15 +64,25 @@ export class SudokuComponent implements OnInit {
   //print board to console
   async submit() {
     if (this.inputIsValid(this.submitBoard)) {
+      this.timer.stop();
+      this.playerTime = `${this.timer.minutes}:${
+        this.timer.seconds < 10 ? "0" + this.timer.seconds : this.timer.seconds
+      }`;
+      this.isPlaying = false;
       // User has won, let AI solve
       this.color = "text-success";
-      this.feedback = "You won! Let me solve it for you.";
+      this.feedback = "That's correct! Let's see how the AI does it.";
       console.log(this.submitBoard);
+      this.timer.start();
       const answer = await solve(this.aiBoard, true);
+      this.aiTime = `${this.timer.minutes}:${
+        this.timer.seconds < 10 ? "0" + this.timer.seconds : this.timer.seconds
+      }`;
+      this.timer.stop();
       console.log(answer);
     } else {
       this.color = "text-danger";
-      this.feedback = "You have not won yet.";
+      this.feedback = "That's not quite right. Try again!";
     }
   }
 
