@@ -1,12 +1,26 @@
 .title {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100px; /* Adjust the height as needed */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 580;
+  height: 100px; /* Adjust the height as needed */
 }
 
 .feedback {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 20px;
-    height: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  height: 30px;
+}
+
+.text {
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  padding: 10px;
+}
+
+h3 {
+  font-weight: 580;
+  text-align: right;
+  margin-right: 30px;
 }

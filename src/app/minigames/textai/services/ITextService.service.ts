@@ -2,12 +2,11 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Text } from "src/app/minigames/textai/models/text.model";
 
-@Injectable ({
-    providedIn: "root",
+@Injectable({
+  providedIn: "root",
 })
-
 export abstract class ITextService {
-    abstract getTexts(): Observable<Text[]>;
-    abstract getRandomText(): Observable<Text>;
-    abstract  resetTextCounter(): void;
+  abstract getTexts(): Observable<Text[]>;
+  abstract getRandomText(): Observable<Text>;
+  abstract resetTextCounter(): void;
 }
