@@ -2,7 +2,7 @@ import { Observable, of } from "rxjs";
 import { Picture } from "../models/picture.model";
 import { IPictureService } from "./IPictureService.service";
 
-export class pictureService implements IPictureService {
+export class PictureService implements IPictureService {
     private used: number[] = [];
     readonly pictures: Picture[] = [
         new Picture({
