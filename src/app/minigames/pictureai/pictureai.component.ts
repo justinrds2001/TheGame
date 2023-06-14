@@ -10,6 +10,7 @@ import { Picture } from "./models/picture.model";
 export class PictureaiComponent implements OnInit 
 {
 	picture: Picture = new Picture({name: '', image: '', description: ''});
+	showAiAnswer: boolean = false;
 
 	constructor(
         private pictureService: IPictureService

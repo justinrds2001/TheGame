@@ -7,7 +7,7 @@ export class pictureService implements IPictureService {
     readonly pictures: Picture[] = [
         new Picture({
             name: "Otter with ball",
-            image: "assets/AiPictures/OtterWithBall.jpg",
+            image: "assets/AiPictures/otterWithBall.jpg",
             description: "TBD"
         }),
         new Picture({

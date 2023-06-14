@@ -5,6 +5,16 @@
 
 <div class="row">
     <div class="col-md-6">
-        <img src={{ picture.image }}>
+        <img src="{{ picture.image }}">
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <textarea id="userInput" name="userInput"></textarea>
+        <button>Submit</button>
+    </div>
+    <div class="col-md-6">
+        <textarea name="AiInput" id="AiInput" readonly="true" *ngIf="showAiAnswer">{{picture.description}}</textarea>
     </div>
 </div>
