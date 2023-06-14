@@ -12,7 +12,7 @@
 
 <div class="row">
     <div class="col-md-6">
-        <textarea id="userInput" name="userInput"></textarea>
+        <textarea id="userInput" name="userInput" [disabled]="disable"></textarea>
     </div>
     <div class="col-md-6">
         <p name="AiInput" id="AiInput" readonly="true" *ngIf="showAiAnswer">{{picture.description}}</p>
