@@ -95,7 +95,13 @@
     </button>
   </div>
   <div class="col sm-3">
-    <button class="btn btn-primary" (click)="finish()">Done</button>
-    <button class="btn btn-danger" (click)="clearCanvas()">Clear</button>
+    <button class="btn btn-primary m-1" (click)="finish()">Done</button>
+    <button class="btn btn-danger m-1" (click)="clearCanvas()">Clear</button>
+    <button
+      class="btn btn-warning m-1"
+      title="Click for help"
+      (click)="openDialog()">
+      Rules
+    </button>
   </div>
 </div>

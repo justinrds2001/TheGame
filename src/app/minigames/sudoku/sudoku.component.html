@@ -20,26 +20,14 @@
 		</table>
 		<div class="feedback {{ color }}">{{ feedback }}</div>
 		<button
-			[disabled]="!isPlaying"
-			class="btn btn-primary m-1"
-			(click)="submit()"
-		>
-			Check
-		</button>
-		<button
-			[disabled]="!isPlaying"
-			class="btn btn-danger m-1"
-			(click)="forfeit()"
-		>
-			Forfeit
-		</button>
-		<button
 			class="btn btn-warning m-1"
-			(click)="solve()"
-			style="display: none"
+			title="Click for help"
+			(click)="openDialog()"
 		>
-			Solve
+			Rules
 		</button>
+		<button class="btn btn-primary m-1" (click)="submit()">Check</button>
+		<button class="btn btn-danger m-1" (click)="forfeit()">Forfeit</button>
 	</div>
 	<div class="col-md-6">
 		<h2>AI {{ aiTime }}</h2>

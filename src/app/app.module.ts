@@ -11,7 +11,8 @@ import { CdkDrag, CdkDragHandle } from "@angular/cdk/drag-drop";
 import { FormsModule } from "@angular/forms";
 import { ColorPickerModule } from "ngx-color-picker";
 import { CdTimerModule } from "angular-cd-timer";
-import { MenuComponent } from './menu/menu.component';
+import { MatDialogModule } from "@angular/material/dialog";
+import { MenuComponent } from "./menu/menu.component";
 
 import { ITextService } from "./minigames/textai/services/ITextService.service";
 import { TextService } from "./minigames/textai/services/textService.service";
@@ -35,6 +36,7 @@ import { PictureService } from "./minigames/pictureai/services/pictureService.se
     ColorPickerModule,
     CdkDrag,
     CdkDragHandle,
+    MatDialogModule,
   ],
   providers: [
     { provide: ITextService, useClass: TextService },
