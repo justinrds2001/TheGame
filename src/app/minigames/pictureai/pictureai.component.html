@@ -12,9 +12,21 @@
 <div class="row">
     <div class="col-md-6">
         <textarea id="userInput" name="userInput"></textarea>
-        <button>Submit</button>
+        <button [disabled]="disable" class="btn btn-primary m-1" (click)="submit()">Submit</button>
     </div>
     <div class="col-md-6">
-        <textarea name="AiInput" id="AiInput" readonly="true" *ngIf="showAiAnswer">{{picture.description}}</textarea>
+        <p name="AiInput" id="AiInput" readonly="true" *ngIf="showAiAnswer">{{picture.description}}</p>
     </div>
 </div>
+<div class="col-md-2">
+    <button
+      class="btn btn-warning m-1"
+      title="Click for help"
+      (click)="openDialog()">
+      Rules
+    </button>
+
+    <button [disabled]="!disable" class="btn btn-primary m-1" (click)="next()">
+      Next
+    </button>
+  </div>
