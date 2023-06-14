@@ -1,8 +1,9 @@
 img {
     width: 500px;
     height: 383px;
-    padding-bottom: 50px;
-    padding-left: 150px;
+    margin-bottom: 50px;
+    margin-left: 75px;
+    display: flex;
 }
 
 .title {
