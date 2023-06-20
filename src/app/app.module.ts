@@ -18,6 +18,7 @@ import { ITextService } from "./minigames/textai/services/ITextService.service";
 import { TextService } from "./minigames/textai/services/textService.service";
 import { IPictureService } from "./minigames/pictureai/services/IPictureService.service";
 import { pictureService } from "./minigames/pictureai/services/pictureService.service";
+import { TextBubbleComponent } from './text-bubble/text-bubble.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { pictureService } from "./minigames/pictureai/services/pictureService.se
     PictureaiComponent,
     TextaiComponent,
     MenuComponent,
+    TextBubbleComponent,
   ],
   imports: [
     BrowserModule,

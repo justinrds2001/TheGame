@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { Painting } from "./AIPaintingHandler/painting";
 import { PaintingCreator } from "./AIPaintingHandler/paintingCreator";
 import { MatDialog } from "@angular/material/dialog";
+import { TextBubbleComponent } from "src/app/text-bubble/text-bubble.component";
 
 @Component({
   selector: "drawai",
@@ -241,12 +242,16 @@ export class DrawaiComponent implements OnInit {
 
   //Open dialog
   openDialog() {
+    this.dialog.open(TextBubbleComponent, {
+      width: "1000px",
+    });
     this.dialog.open(Dialog);
   }
 }
 
 @Component({
-  selector: "dialog-sudoku",
+  selector: "dialog-drawai",
   templateUrl: "./dialog-drawai.html",
+  styleUrls: ["./dialog-drawai.css"],
 })
 export class Dialog {}
