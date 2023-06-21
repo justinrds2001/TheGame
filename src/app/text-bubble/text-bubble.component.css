@@ -9,11 +9,9 @@
   font-weight: 900;
   font-family: arial;
   position: relative;
-  top: 175px;
+  top: 125px;
   margin-top: 0;
 }
-
-/* speech bubble 13 */
 
 .npc:before {
   content: "";
@@ -27,9 +25,6 @@
   right: -16px;
   top: 0px;
 }
-
-/* speech bubble 14 */
-
 .player:before {
   content: "";
   width: 0px;
@@ -52,12 +47,18 @@
   width: 75px;
   position: absolute;
   left: 250px;
-  top: 150px;
+  top: 100px;
 }
 
 .npc-icon {
   width: 75px;
   position: absolute;
   right: 250px;
-  top: 150px;
+  top: 100px;
+}
+
+.continue {
+  position: absolute;
+  left: 450px;
+  bottom: 0;
 }

@@ -3,6 +3,7 @@ import { Painting } from "./AIPaintingHandler/painting";
 import { PaintingCreator } from "./AIPaintingHandler/paintingCreator";
 import { MatDialog } from "@angular/material/dialog";
 import { TextBubbleComponent } from "src/app/text-bubble/text-bubble.component";
+import { DrawAiIntro } from "src/app/text-bubble/conversations/drawai-intro";
 
 @Component({
   selector: "drawai",
@@ -247,6 +248,7 @@ export class DrawaiComponent implements OnInit {
       width: "1000px",
       height: "400px",
       disableClose: true,
+      data: { conversationType: DrawAiIntro },
     });
   }
 }
