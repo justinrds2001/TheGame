@@ -242,10 +242,12 @@ export class DrawaiComponent implements OnInit {
 
   //Open dialog
   openDialog() {
+    this.dialog.open(Dialog);
     this.dialog.open(TextBubbleComponent, {
       width: "1000px",
+      height: "400px",
+      disableClose: true,
     });
-    this.dialog.open(Dialog);
   }
 }
 

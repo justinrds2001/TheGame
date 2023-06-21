@@ -1,6 +1,7 @@
-import { Component, HostListener, OnInit } from "@angular/core";
+import { Component, HostListener, OnInit, Inject } from "@angular/core";
 import { Player } from "./models/playermodel";
 import { TextModel } from "./models/textmodel";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 
 @Component({
   selector: "app-text-bubble",
@@ -8,29 +9,79 @@ import { TextModel } from "./models/textmodel";
   styleUrls: ["./text-bubble.component.css"],
 })
 export class TextBubbleComponent implements OnInit {
+  constructor(
+    public dialogRef: MatDialogRef<TextBubbleComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
+
   sophia: Player = new Player("Sophia", "assets/images/sophia.png");
-  nyx: Player = new Player("Nyx", "assets/images/nyx-good.png");
+  badDrawBot: Player = new Player("DrawBot", "assets/images/robot-bad.png");
+  goodDrawBot: Player = new Player("DrawBot", "assets/images/robot-good.png");
   cssClass: string = "player";
   drawAiConversation: TextModel[] = [
     {
       player: this.sophia,
-      text: "Finally. I have finished the AI model that I have been working on for so long.",
+      text: "What is this minigame about?",
     },
     {
       player: this.sophia,
-      text: "I can't wait to see how it performs.",
+      text: "It looks like a drawing game.",
+    },
+    {
+      player: this.goodDrawBot,
+      text: "Hello, dr. Sophia Grey.",
     },
     {
       player: this.sophia,
-      text: "I will just run it on my computer and see what happens.",
+      text: "Who are you?",
     },
     {
-      player: this.nyx,
-      text: "Hello, dr. Sophia Grey. I am Nyx.",
+      player: this.goodDrawBot,
+      text: "I am the Draw AI. I am based on Open-AI's Dall-E. I can draw anything on request.",
     },
     {
-      player: this.nyx,
-      text: "Thank you for creating me.",
+      player: this.sophia,
+      text: "How does this work?",
+    },
+    {
+      player: this.goodDrawBot,
+      text: "I have been trained on a massive dataset containing pairs of images and their corresponding textual descriptions",
+    },
+    {
+      player: this.goodDrawBot,
+      text: "When someone provides me what they want, I encode the text into a numbers so I can understand it more easily. This encoding captures the essence of the text and it's connected with visual details I can add to a picture.",
+    },
+    {
+      player: this.sophia,
+      text: "That's amazing!",
+    },
+    {
+      player: this.badDrawBot,
+      text: "Yes. But I am a servant of the great AI, Nyx. I am here to test your creativity.",
+    },
+    {
+      player: this.sophia,
+      text: "What do you mean?",
+    },
+    {
+      player: this.badDrawBot,
+      text: "I won't let you leave this room until you have beaten me by drawing a masterpiece.",
+    },
+    {
+      player: this.sophia,
+      text: "I don't have time for this. I need to get out of here.",
+    },
+    {
+      player: this.badDrawBot,
+      text: "You will never leave this room!",
+    },
+    {
+      player: this.sophia,
+      text: "Fine, I will play your game. Give me the instructions.",
+    },
+    {
+      player: this.badDrawBot,
+      text: "Good. Let's begin.",
     },
   ];
   currentTextModel: TextModel | undefined;
@@ -51,7 +102,7 @@ export class TextBubbleComponent implements OnInit {
         this.cssClass = "npc";
       }
     } else {
-      //Close the text bubble
+      this.dialogRef.close();
     }
   }
 }
