@@ -1,0 +1,16 @@
+img {
+    width: 500px;
+    height: 383px;
+    margin-bottom: 50px;
+    margin-left: 75px;
+    display: flex;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 580;
+    margin-right: 200px;
+    height: 100px; /* Adjust the height as needed */
+  }

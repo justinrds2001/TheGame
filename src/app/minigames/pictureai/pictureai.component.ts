@@ -10,8 +10,11 @@ import { MatDialog } from "@angular/material/dialog";
   styleUrls: ["./pictureai.component.css"],
   selector: "app-pictureai",
 })
-export class PictureaiComponent implements OnInit {
-  picture: Picture = new Picture({ name: "", image: "", description: "" });
+export class PictureaiComponent implements OnInit 
+{
+	picture: Picture = new Picture({name: '', image: '', description: ''});
+	showAiAnswer: boolean = false;
+    disable: boolean = false;
 
   constructor(public dialog: MatDialog, private pictureService: IPictureService) {
     this.openDialog();
@@ -24,6 +27,21 @@ export class PictureaiComponent implements OnInit {
       .subscribe((picture) => (this.picture = picture));
   }
 
+  submit(): void {
+    this.showAiAnswer = true;
+    this.disable = true;
+  }
+
+  next(): void {
+    this.pictureService.getRandomPicture().subscribe((picture) => (this.picture = picture));
+    this.showAiAnswer = false;
+    this.disable = false;
+    if (this.picture.description == "Information") {
+      this.disable = true;
+      this.showAiAnswer = true;
+    }
+  }
+  
   //Open dialog
   openDialog() {
     //this.rulesDialog = this.dialog.open(DialogContentExampleDialog);
@@ -34,3 +52,6 @@ export class PictureaiComponent implements OnInit {
       data: { conversationType: PictureAiIntro },
   });
 }}
+  
+
+  
