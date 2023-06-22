@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { IPictureService } from "./services/IPictureService.service";
 import { Picture } from "./models/picture.model";
+import { PictureAiIntro } from "src/app/text-bubble/conversations/pictureai-intro";
+import { TextBubbleComponent } from "src/app/text-bubble/text-bubble.component";
 import { MatDialog } from "@angular/material/dialog";
 
 @Component({
@@ -39,16 +41,17 @@ export class PictureaiComponent implements OnInit
       this.showAiAnswer = true;
     }
   }
-
-  openDialog() {
-    this.dialog.open(Dialog);
-  }
   
-}
+  //Open dialog
+  openDialog() {
+    //this.rulesDialog = this.dialog.open(DialogContentExampleDialog);
+    this.dialog.open(TextBubbleComponent, {
+      width: "1000px",
+      height: "400px",
+      disableClose: true,
+      data: { conversationType: PictureAiIntro },
+  });
+}}
+  
 
-@Component({
-    selector: "dialog-pictureai",
-    templateUrl: "./dialog-pictureai.html",
-  })
-  export class Dialog {}
   

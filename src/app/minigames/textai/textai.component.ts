@@ -1,7 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { Text } from "./models/text.model";
 import { ITextService } from "./services/ITextService.service";
-import { MatDialog } from "@angular/material/dialog";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { DialogContentExampleDialog } from "../sudoku/sudoku.component";
+import { TextBubbleComponent } from "src/app/text-bubble/text-bubble.component";
+import { TextAiIntro } from "src/app/text-bubble/conversations/textai-intro";
 
 @Component({
   templateUrl: "./textai.component.html",
@@ -13,6 +16,7 @@ export class TextaiComponent implements OnInit {
   feedback: string = "";
   color: string = "";
   disable: boolean = false;
+  rulesDialog: MatDialogRef<DialogContentExampleDialog> | undefined;
   score: number = 0;
   highestScore: number = 0;
 
@@ -61,8 +65,14 @@ export class TextaiComponent implements OnInit {
 
   //Open dialog
   openDialog() {
-    this.dialog.open(Dialog);
-  }
+    this.rulesDialog = this.dialog.open(DialogContentExampleDialog);
+    this.dialog.open(TextBubbleComponent, {
+        width: "1000px",
+        height: "400px",
+        disableClose: true,
+        data: { conversationType: TextAiIntro },
+    });
+}
 }
 
 @Component({
