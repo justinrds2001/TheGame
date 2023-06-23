@@ -21,29 +21,29 @@ import { TextBubbleComponent } from "./text-bubble/text-bubble.component";
 import { PictureService } from "./minigames/pictureai/services/pictureService.service";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    SudokuComponent,
-    DrawaiComponent,
-    PictureaiComponent,
-    TextaiComponent,
-    MenuComponent,
-    TextBubbleComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    CdTimerModule,
-    ColorPickerModule,
-    CdkDrag,
-    CdkDragHandle,
-    MatDialogModule,
-  ],
-  providers: [
-    { provide: ITextService, useClass: TextService },
-    { provide: IPictureService, useClass: PictureService },
-  ],
-  bootstrap: [AppComponent],
+	declarations: [
+		AppComponent,
+		SudokuComponent,
+		DrawaiComponent,
+		PictureaiComponent,
+		TextaiComponent,
+		MenuComponent,
+		TextBubbleComponent,
+	],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		FormsModule,
+		CdTimerModule,
+		ColorPickerModule,
+		CdkDrag,
+		CdkDragHandle,
+		MatDialogModule,
+	],
+	providers: [
+		{ provide: ITextService, useClass: TextService },
+		{ provide: IPictureService, useClass: PictureService },
+	],
+	bootstrap: [AppComponent],
 })
 export class AppModule {}
