@@ -90,9 +90,11 @@ export class SudokuComponent implements OnInit {
       disableClose: true,
       data: { conversationType: conversationType },
     });
-    this.convoRef.afterClosed().subscribe(() => {
-      this.openRules();
-    });
+    if (conversationType == SudokuAiIntro) {
+      this.convoRef.afterClosed().subscribe(() => {
+        this.openRules();
+      });
+    }
   }
 
   boardIsFilled(): boolean {

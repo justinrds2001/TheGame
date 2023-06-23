@@ -257,9 +257,11 @@ export class DrawaiComponent implements OnInit {
       disableClose: true,
       data: { conversationType: conversationType },
     });
-    this.convoRef.afterClosed().subscribe(() => {
-      this.openRules();
-    });
+    if (conversationType == DrawAiIntro) {
+      this.convoRef.afterClosed().subscribe(() => {
+        this.openRules();
+      });
+    }
   }
 
   //Open dialog

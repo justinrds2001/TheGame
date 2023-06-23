@@ -1,4 +1,7 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
+import { TextBubbleComponent } from "../text-bubble/text-bubble.component";
+import { MenuOutro } from "../text-bubble/conversations/menu-outro";
 
 interface MenuItem {
   imgUrl: string;
@@ -12,7 +15,15 @@ interface MenuItem {
   templateUrl: "./menu.component.html",
   styleUrls: ["./menu.component.css"],
 })
-export class MenuComponent {
+export class MenuComponent implements OnInit {
+  ngOnInit(): void {
+    if (this.everythingBeaten()) {
+      this.openTextBubble(MenuOutro);
+    }
+  }
+
+  constructor(public dialog: MatDialog) {}
+
   menuItems: MenuItem[] = [
     {
       imgUrl: "assets/images/sudoku.png",
@@ -44,4 +55,17 @@ export class MenuComponent {
       isBeaten: localStorage.getItem("drawai") == "true",
     },
   ];
+
+  openTextBubble(conversationType: any) {
+    this.dialog.open(TextBubbleComponent, {
+      width: "1000px",
+      height: "400px",
+      disableClose: true,
+      data: { conversationType: conversationType },
+    });
+  }
+
+  everythingBeaten(): boolean {
+    return this.menuItems.every((item) => item.isBeaten);
+  }
 }

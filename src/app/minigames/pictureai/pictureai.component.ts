@@ -61,9 +61,11 @@ export class PictureaiComponent implements OnInit {
       disableClose: true,
       data: { conversationType: conversationType },
     });
-    this.convoRef.afterClosed().subscribe(() => {
-      this.openRules();
-    });
+    if (conversationType == PictureAiIntro) {
+      this.convoRef.afterClosed().subscribe(() => {
+        this.openRules();
+      });
+    }
   }
 
   //Open dialog
