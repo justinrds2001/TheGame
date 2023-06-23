@@ -31,6 +31,7 @@ export class DrawaiComponent implements OnInit {
   isPenSelected = true;
   isEraserSelected = false;
   rulesDialog: MatDialogRef<Dialog> | undefined;
+  convoRef: MatDialogRef<TextBubbleComponent> | undefined;
 
   ngOnInit(): void {
     this.theme = new PaintingCreator().pickRandomPainting();
@@ -246,16 +247,18 @@ export class DrawaiComponent implements OnInit {
 
   //Open dialog on screen load
   constructor(public dialog: MatDialog) {
-    this.openRules();
     this.openTextBubble(DrawAiIntro);
   }
 
   openTextBubble(conversationType: any) {
-    this.dialog.open(TextBubbleComponent, {
+    this.convoRef = this.dialog.open(TextBubbleComponent, {
       width: "1000px",
       height: "400px",
       disableClose: true,
       data: { conversationType: conversationType },
+    });
+    this.convoRef.afterClosed().subscribe(() => {
+      this.openRules();
     });
   }
 

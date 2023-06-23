@@ -16,12 +16,12 @@ export class PictureaiComponent implements OnInit {
   showAiAnswer: boolean = false;
   disable: boolean = false;
   finished: boolean = false;
+  convoRef: MatDialogRef<TextBubbleComponent> | undefined;
 
   constructor(
     public dialog: MatDialog,
     private pictureService: IPictureService
   ) {
-    this.openRules();
     this.openTextBubble(PictureAiIntro);
   }
 
@@ -55,11 +55,14 @@ export class PictureaiComponent implements OnInit {
   }
 
   openTextBubble(conversationType: any) {
-    this.dialog.open(TextBubbleComponent, {
+    this.convoRef = this.dialog.open(TextBubbleComponent, {
       width: "1000px",
       height: "400px",
       disableClose: true,
       data: { conversationType: conversationType },
+    });
+    this.convoRef.afterClosed().subscribe(() => {
+      this.openRules();
     });
   }
 

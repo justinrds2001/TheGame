@@ -20,9 +20,9 @@ export class TextaiComponent implements OnInit {
   score: number = 0;
   highestScore: number = 0;
   finished: boolean = false;
+  convoRef: MatDialogRef<TextBubbleComponent> | undefined;
 
   constructor(public dialog: MatDialog, private textService: ITextService) {
-    this.openRules();
     this.openTextBubble(TextAiIntro);
   }
 
@@ -78,11 +78,14 @@ export class TextaiComponent implements OnInit {
   }
 
   openTextBubble(conversationType: any) {
-    this.dialog.open(TextBubbleComponent, {
+    this.convoRef = this.dialog.open(TextBubbleComponent, {
       width: "1000px",
       height: "400px",
       disableClose: true,
       data: { conversationType: conversationType },
+    });
+    this.convoRef.afterClosed().subscribe(() => {
+      this.openRules();
     });
   }
 

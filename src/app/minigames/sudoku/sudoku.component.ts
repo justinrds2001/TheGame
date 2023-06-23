@@ -25,6 +25,7 @@ export class SudokuComponent implements OnInit {
   submitBoard: number[][] = [];
   aiBoard: number[][] = [];
   rulesDialog: MatDialogRef<DialogContentExampleDialog> | undefined;
+  convoRef: MatDialogRef<TextBubbleComponent> | undefined;
 
   ngOnInit(): void {
     console.log("sudoku init");
@@ -68,7 +69,6 @@ export class SudokuComponent implements OnInit {
 
   //Open dialog on screen load
   constructor(public dialog: MatDialog) {
-    this.openRules();
     this.openTextBubble(SudokuAiIntro);
   }
 
@@ -84,11 +84,14 @@ export class SudokuComponent implements OnInit {
   }
 
   openTextBubble(conversationType: any) {
-    this.dialog.open(TextBubbleComponent, {
+    this.convoRef = this.dialog.open(TextBubbleComponent, {
       width: "1000px",
       height: "400px",
       disableClose: true,
       data: { conversationType: conversationType },
+    });
+    this.convoRef.afterClosed().subscribe(() => {
+      this.openRules();
     });
   }
 
