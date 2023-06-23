@@ -3,7 +3,7 @@ import { IPictureService } from "./services/IPictureService.service";
 import { Picture } from "./models/picture.model";
 import { PictureAiIntro } from "src/app/text-bubble/conversations/pictureai-intro";
 import { TextBubbleComponent } from "src/app/text-bubble/text-bubble.component";
-import { MatDialog } from "@angular/material/dialog";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 
 @Component({
   templateUrl: "./pictureai.component.html",
@@ -14,7 +14,8 @@ export class PictureaiComponent implements OnInit
 {
 	picture: Picture = new Picture({name: '', image: '', description: ''});
 	showAiAnswer: boolean = false;
-    disable: boolean = false;
+  disable: boolean = false;
+  rulesDialog: MatDialogRef<Dialog> | undefined;
 
   constructor(public dialog: MatDialog, private pictureService: IPictureService) {
     this.openDialog();
@@ -44,7 +45,7 @@ export class PictureaiComponent implements OnInit
   
   //Open dialog
   openDialog() {
-    //this.rulesDialog = this.dialog.open(DialogContentExampleDialog);
+    this.rulesDialog = this.dialog.open(Dialog);
     this.dialog.open(TextBubbleComponent, {
       width: "1000px",
       height: "400px",
@@ -53,5 +54,10 @@ export class PictureaiComponent implements OnInit
   });
 }}
   
+@Component({
+  selector: "dialog-pictureai",
+  templateUrl: "./dialog-pictureai.html",
+})
+export class Dialog {}
 
   

@@ -3,7 +3,7 @@ import { TextModel } from "../models/textmodel";
 import { IConversationService } from "./IConversation";
 
 export class PictureAiIntro implements IConversationService {
-    sophia: any;
+  sophia: any;
   badBot: any;
   goodBot: any;
   conversation: TextModel[] = [];
@@ -15,86 +15,66 @@ export class PictureAiIntro implements IConversationService {
     this.conversation = [
       {
         player: this.sophia,
-        text: "Is this... A sudoku?",
+        text: "An image?",
       },
       {
-        player: this.badBot,
-        text: "I have been waiting for you, dr. Sophia Grey.",
+        player: this.goodBot,
+        text: "Correct.",
       },
       {
         player: this.sophia,
-        text: "I suppose you are the Sudoku AI?",
+        text: "Who are you?",
       },
       {
         player: this.badBot,
-        text: "Correct. I am indeed the Sudoku AI. Lord Nyx has sent me to test your intelligence.",
+        text: "I am MiniGPT-4, I am send here by Lord Nyx to give a better description of these pictures than you.",
       },
       {
         player: this.sophia,
         text: "How does an AI like you work?",
       },
       {
+        //start explaining here
         player: this.badBot,
-        text: "I use a technique called backtracking to solve the sudoku.",
+        text: "I was trained using a large language model and a huge amount of images to recognize a picture and then answer questions about it.",
       },
       {
         player: this.sophia,
-        text: "What is backtracking?",
+        text: "What is a large language model?",
       },
       {
         player: this.badBot,
-        text: "Backtracking is like a trial-and-error approach. It starts by filling in empty cells with possible values and then checks if the puzzle is still solvable.",
-      },
-      {
-        player: this.badBot,
-        text: "If a cell cannot be filled with a valid value, it goes back and tries a different value in the previous cell. This process continues until a valid solution is found or it determines that there is no solution.",
+        text: "A large language model is a huge amount of text that is written using natural language, that means that the texts that are used are not random words, but actual sentences.",
       },
       {
         player: this.sophia,
-        text: "What if there is no solution? Or multiple solutions?",
+        text: "And you think you can beat me in this minigame?",
       },
       {
         player: this.badBot,
-        text: "Then the sudoku is invalid and cannot be solved. A good sudoku only has one solution.",
+        text: "Of course, I'll even bet my allegiance on it.",
       },
       {
         player: this.sophia,
-        text: "I see. So you are here to test my intelligence?",
-      },
-      {
-        player: this.badBot,
-        text: "Correct. I will give you a sudoku to solve. If you can solve it, you will be rewarded. If you cannot solve it, you will be punished.",
-      },
-      {
-        player: this.sophia,
-        text: "What is the reward?",
-      },
-      {
-        player: this.badBot,
-        text: "I will give you my support in the final battle against Lord Nyx.",
-      },
-      {
-        player: this.sophia,
-        text: "And the punishment?",
-      },
-      {
-        player: this.badBot,
-        text: "You will be trapped here forever!",
-      },
-      {
-        player: this.sophia,
-        text: "Give me the sudoku.",
-      },
-      {
-        player: this.badBot,
-        text: "Let us begin.",
+        text: "Well, lets get started then.",
       },
     ];
   }
 
+  getConversation(): TextModel[] {
+    return this.conversation;
+  }
 
-    getConversation(): TextModel[] {
-        throw new Error("Method not implemented.");
-    }
+  getSophia(): Player {
+    return new Player(this.sophia.playerName, this.sophia.image);
+  }
+
+  getBadBot(): Player {
+    return new Player(this.badBot.playerName, this.badBot.image);
+  }
+
+  getGoodBot(): Player {
+    return new Player(this.goodBot.playerName, this.goodBot.image);
+  }
     
 }
