@@ -5,6 +5,7 @@ import { PictureaiComponent } from "./minigames/pictureai/pictureai.component";
 import { TextaiComponent } from "./minigames/textai/textai.component";
 import { DrawaiComponent } from "./minigames/drawai/drawai.component";
 import { MenuComponent } from "./menu/menu.component";
+import { TextBubbleComponent } from "./text-bubble/text-bubble.component";
 
 const routes: Routes = [
 	{
@@ -26,6 +27,11 @@ const routes: Routes = [
 		path: "minigames/drawai",
 		pathMatch: "full",
 		component: DrawaiComponent,
+	},
+	{
+		path: "minigames/bubble",
+		pathMatch: "full",
+		component: TextBubbleComponent,
 	},
 	{
 		path: "minigames",

@@ -1,10 +1,52 @@
-<div class="title">
-    <h1> Describe this picture as clear as possible. </h1>
-
+<div class="row">
+  <div class="col md-2">
+    <button class="btn btn-primary m-1" routerLink="../">Exit</button>
+  </div>
+  <div class="col-md-10">
+    <div class="title">
+      <h1 *ngIf="!finished">Describe this picture as clear as possible.</h1>
+      <h1 *ngIf="finished">
+        You have finished all of the pictures. You can play other minigames now.
+      </h1>
+    </div>
+  </div>
 </div>
 
 <div class="row">
-    <div class="col-md-6">
-        <img src={{ picture.image }}>
-    </div>
+  <div class="col-md-3"></div>
+  <div class="col-md-8">
+    <img src="{{ picture.image }}" />
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <textarea id="userInput" name="userInput" [disabled]="disable"></textarea>
+  </div>
+  <div class="col-md-6">
+    <p name="AiInput" id="AiInput" readonly="true" *ngIf="showAiAnswer">
+      {{ picture.description }}
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-10">
+    <button [disabled]="disable" class="btn btn-primary m-1" (click)="submit()">
+      Submit
+    </button>
+  </div>
+  <div class="col-md-2">
+    <button
+      class="btn btn-warning m-1"
+      title="Click for help"
+      (click)="openRules()">
+      Rules
+    </button>
+    <button
+      [disabled]="!disable || finished"
+      class="btn btn-primary m-1"
+      (click)="next()">
+      Next
+    </button>
+  </div>
 </div>

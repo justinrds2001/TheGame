@@ -1,7 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { Painting } from "./AIPaintingHandler/painting";
 import { PaintingCreator } from "./AIPaintingHandler/paintingCreator";
-import { MatDialog } from "@angular/material/dialog";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { TextBubbleComponent } from "src/app/text-bubble/text-bubble.component";
+import { DrawAiIntro } from "src/app/text-bubble/conversations/drawai-intro";
+import { DrawAiOutro } from "src/app/text-bubble/conversations/drawai-outro";
 
 @Component({
   selector: "drawai",
@@ -27,6 +30,8 @@ export class DrawaiComponent implements OnInit {
   eraserWidth = 50;
   isPenSelected = true;
   isEraserSelected = false;
+  rulesDialog: MatDialogRef<Dialog> | undefined;
+  convoRef: MatDialogRef<TextBubbleComponent> | undefined;
 
   ngOnInit(): void {
     this.theme = new PaintingCreator().pickRandomPainting();
@@ -171,6 +176,12 @@ export class DrawaiComponent implements OnInit {
 
   finish(): void {
     this.showPicture = true;
+    setTimeout(() => {
+      this.openTextBubble(DrawAiOutro);
+    }, 1000);
+    if (localStorage.getItem("drawai") == null) {
+      localStorage.setItem("drawai", "true");
+    }
   }
 
   updateLineWidth(value: Event): void {
@@ -236,17 +247,32 @@ export class DrawaiComponent implements OnInit {
 
   //Open dialog on screen load
   constructor(public dialog: MatDialog) {
-    this.openDialog();
+    this.openTextBubble(DrawAiIntro);
+  }
+
+  openTextBubble(conversationType: any) {
+    this.convoRef = this.dialog.open(TextBubbleComponent, {
+      width: "1000px",
+      height: "400px",
+      disableClose: true,
+      data: { conversationType: conversationType },
+    });
+    if (conversationType == DrawAiIntro) {
+      this.convoRef.afterClosed().subscribe(() => {
+        this.openRules();
+      });
+    }
   }
 
   //Open dialog
-  openDialog() {
-    this.dialog.open(Dialog);
+  openRules() {
+    this.rulesDialog = this.dialog.open(Dialog);
   }
 }
 
 @Component({
-  selector: "dialog-sudoku",
+  selector: "dialog-drawai",
   templateUrl: "./dialog-drawai.html",
+  styleUrls: ["./dialog-drawai.css"],
 })
 export class Dialog {}
