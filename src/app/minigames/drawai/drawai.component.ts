@@ -4,7 +4,7 @@ import { PaintingCreator } from "./AIPaintingHandler/paintingCreator";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { TextBubbleComponent } from "src/app/text-bubble/text-bubble.component";
 import { DrawAiIntro } from "src/app/text-bubble/conversations/drawai-intro";
-import { SudokuAiOutro } from "src/app/text-bubble/conversations/sudokuai-outro";
+import { DrawAiOutro } from "src/app/text-bubble/conversations/drawai-outro";
 
 @Component({
   selector: "drawai",
@@ -177,7 +177,7 @@ export class DrawaiComponent implements OnInit {
   finish(): void {
     this.showPicture = true;
     setTimeout(() => {
-      this.openTextBubble(SudokuAiOutro);
+      this.openTextBubble(DrawAiOutro);
     }, 1000);
     if (localStorage.getItem("drawai") == null) {
       localStorage.setItem("drawai", "true");
