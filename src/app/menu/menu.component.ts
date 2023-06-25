@@ -69,9 +69,9 @@ export class MenuComponent implements OnInit {
 		});
 	}
 
-	resetProgress() {
+	async resetProgress() {
 		localStorage.clear();
-		this.router.navigateByUrl("../");
+		await this.router.navigate(["/"]);
 	}
 
 	everythingBeaten(): boolean {
