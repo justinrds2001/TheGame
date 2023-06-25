@@ -69,11 +69,6 @@ export class MenuComponent implements OnInit {
 		});
 	}
 
-	resetProgress() {
-		localStorage.clear();
-		this.router.navigate(["../"]);
-	}
-
 	everythingBeaten(): boolean {
 		return this.menuItems.every((item) => item.isBeaten);
 	}

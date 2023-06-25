@@ -1,38 +1,38 @@
 <div class="p-5 text-center bg-light">
-  <h1 class="mb-3">AI Minigames</h1>
-  <h4 class="mb-3">
-    Learn about the power of AI by playing several minigames against it
-  </h4>
+	<h1 class="mb-3">AI Minigames</h1>
+	<h4 class="mb-3">
+		Learn about the power of AI by playing several minigames against it
+	</h4>
 </div>
-<button class="btn btn-primary" (click)="resetProgress()">
-  Reset Progress
-</button>
 <div class="row">
-  <div
-    class="col-sm-4"
-    *ngFor="let item of menuItems"
-    routerLink="{{ item.route }}">
-    <i
-      *ngIf="item.isBeaten"
-      class="fa fa-check-circle"
-      style="font-size: 48px; color: rgb(49, 252, 49)"></i>
-    <div class="card" [class.card-beaten]="item.isBeaten">
-      <div class="image">
-        <div class="image-wrapper">
-          <img src="{{ item.imgUrl }}" />
-        </div>
-      </div>
-      <div class="card-inner">
-        <div class="header">
-          <h2>{{ item.title }}</h2>
-        </div>
-        <div class="content">
-          <p>{{ item.description }}</p>
-        </div>
-      </div>
-    </div>
-  </div>
+	<div
+		class="col-sm-4"
+		*ngFor="let item of menuItems"
+		routerLink="{{ item.route }}"
+	>
+		<i
+			*ngIf="item.isBeaten"
+			class="fa fa-check-circle"
+			style="font-size: 48px; color: rgb(49, 252, 49)"
+		></i>
+		<div class="card" [class.card-beaten]="item.isBeaten">
+			<div class="image">
+				<div class="image-wrapper">
+					<img src="{{ item.imgUrl }}" />
+				</div>
+			</div>
+			<div class="card-inner">
+				<div class="header">
+					<h2>{{ item.title }}</h2>
+				</div>
+				<div class="content">
+					<p>{{ item.description }}</p>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+	rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+/>
