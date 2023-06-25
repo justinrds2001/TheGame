@@ -2,7 +2,7 @@ import { Player } from "../models/playermodel";
 import { TextModel } from "../models/textmodel";
 import { IConversationService } from "./IConversation";
 
-export class TextAiOutro implements IConversationService {
+export class DrawAiOutro implements IConversationService {
   sophia: any;
   badBot: any;
   goodBot: any;

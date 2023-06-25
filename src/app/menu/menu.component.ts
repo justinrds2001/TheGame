@@ -1,7 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { TextBubbleComponent } from "../text-bubble/text-bubble.component";
+import { MenuIntro } from "../text-bubble/conversations/menu-intro";
 import { MenuOutro } from "../text-bubble/conversations/menu-outro";
+import { Router } from "@angular/router";
 
 interface MenuItem {
   imgUrl: string;
@@ -19,10 +21,12 @@ export class MenuComponent implements OnInit {
   ngOnInit(): void {
     if (this.everythingBeaten()) {
       this.openTextBubble(MenuOutro);
+    } else if (this.nothingBeaten()) {
+      this.openTextBubble(MenuIntro);
     }
   }
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private router: Router) {}
 
   menuItems: MenuItem[] = [
     {
@@ -65,7 +69,17 @@ export class MenuComponent implements OnInit {
     });
   }
 
+  resetProgress() {
+    localStorage.clear();
+    //this.router.navigateByUrl("../");
+    window.location.reload();
+  }
+
   everythingBeaten(): boolean {
     return this.menuItems.every((item) => item.isBeaten);
+  }
+
+  nothingBeaten(): boolean {
+    return this.menuItems.every((item) => !item.isBeaten);
   }
 }
