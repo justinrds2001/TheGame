@@ -69,9 +69,11 @@ export class MenuComponent implements OnInit {
 		});
 	}
 
-	async resetProgress() {
+	resetProgress() {
 		localStorage.clear();
-		await this.router.navigate(["/"]);
+		this.router.navigate(["/"], { skipLocationChange: true }).then(() => {
+			this.router.navigate([this.router.url]);
+		});
 	}
 
 	everythingBeaten(): boolean {
